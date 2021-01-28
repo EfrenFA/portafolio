@@ -9,22 +9,41 @@ export class InfoPaginaService {
 
 
   info: InfoPagina = {};
-  cargada = false;
+  cargada = true;
+  equipo: any[]=[];
 
   constructor(private http: HttpClient) {
 
-    //console.log('Servicio de infoPagina listo');
+   this.cargarInfo();
+   this.cargarEquipo();
+
+   }
+
+   private cargarInfo(){
 
     //Leer el archivo json data-pagina.json de carpeta data
 
   this.http.get('assets/data/data-pagina.json')
-    .subscribe( (response: InfoPagina) => {
+    .subscribe( (resp: InfoPagina) => {
 
-      this.cargada = true;
-       this.info = response;
+      //console.log( resp );
+      this.cargada = false;
+      this.info = resp;
      
-      console.log( response );
+      
     });
+   }
+
+   private cargarEquipo(){
+     this.http.get('https://appefren.firebaseio.com/equipo.json')
+     .subscribe( (response: any) => {
+ 
+      this.equipo = response;
+      //console.log( response);
+      this.cargada = false;
+
+
+     });
 
    }
 }
