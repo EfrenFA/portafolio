@@ -57,10 +57,6 @@ buscarProducto( termino: string ){
   }
 
 
-  this.productosf = this.productos.filter(producto =>{
-       return true;
-  });
-
   //console.log(this.productosf);
 
 }
